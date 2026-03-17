@@ -497,10 +497,10 @@ public class Character extends AbstractCharacterObject {
 
 
         //to fix the map 0 lol
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 50; i++) {
             ret.trockmaps.add(MapId.NONE);
         }
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             ret.viptrockmaps.add(MapId.NONE);
         }
 
@@ -7042,7 +7042,7 @@ public class Character extends AbstractCharacterObject {
             }
 
             // Teleport rocks
-            try (PreparedStatement ps = con.prepareStatement("SELECT mapid,vip FROM trocklocations WHERE characterid = ? LIMIT 15")) {
+            try (PreparedStatement ps = con.prepareStatement("SELECT mapid,vip FROM trocklocations WHERE characterid = ? LIMIT 150")) {
                 ps.setInt(1, charid);
 
                 try (ResultSet rs = ps.executeQuery()) {
@@ -7057,11 +7057,11 @@ public class Character extends AbstractCharacterObject {
                             reg++;
                         }
                     }
-                    while (vip < 10) {
+                    while (vip < 100) {
                         ret.viptrockmaps.add(MapId.NONE);
                         vip++;
                     }
-                    while (reg < 5) {
+                    while (reg < 50) {
                         ret.trockmaps.add(MapId.NONE);
                         reg++;
                     }
@@ -9849,7 +9849,7 @@ public class Character extends AbstractCharacterObject {
     public int getTrockSize() {
         int ret = trockmaps.indexOf(MapId.NONE);
         if (ret == -1) {
-            ret = 5;
+            ret = 50;
         }
 
         return ret;
@@ -9857,7 +9857,7 @@ public class Character extends AbstractCharacterObject {
 
     public void deleteFromTrocks(int map) {
         trockmaps.remove(Integer.valueOf(map));
-        while (trockmaps.size() < 10) {
+        while (trockmaps.size() < 50) {
             trockmaps.add(MapId.NONE);
         }
     }
@@ -9878,7 +9878,7 @@ public class Character extends AbstractCharacterObject {
         int ret = viptrockmaps.indexOf(MapId.NONE);
 
         if (ret == -1) {
-            ret = 10;
+            ret = 100;
         }
 
         return ret;
@@ -9886,7 +9886,7 @@ public class Character extends AbstractCharacterObject {
 
     public void deleteFromVipTrocks(int map) {
         viptrockmaps.remove(Integer.valueOf(map));
-        while (viptrockmaps.size() < 10) {
+        while (viptrockmaps.size() < 100) {
             viptrockmaps.add(MapId.NONE);
         }
     }
